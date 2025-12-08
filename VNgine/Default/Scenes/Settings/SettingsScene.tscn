@@ -1,0 +1,174 @@
+[gd_scene load_steps=3 format=3 uid="uid://c58ighls1won7"]
+
+[ext_resource type="Script" uid="uid://bsxm1hih2f8px" path="res://VNgine/Default/Scenes/Settings/SettingsScene.gd" id="1_liyup"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8sge"]
+content_margin_left = 40.0
+content_margin_top = 20.0
+content_margin_right = 40.0
+content_margin_bottom = 20.0
+bg_color = Color(0.2303291, 0.23032913, 0.23032907, 1)
+border_width_top = 5
+
+[node name="Settings" type="Node" node_paths=PackedStringArray("main_layer", "component_layer")]
+script = ExtResource("1_liyup")
+main_layer = NodePath("MainLayer")
+component_layer = NodePath("ComponentLayer")
+
+[node name="MainLayer" type="CanvasLayer" parent="."]
+
+[node name="PanelContainer" type="PanelContainer" parent="MainLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 289.0
+offset_top = 124.0
+offset_right = -271.0
+offset_bottom = -116.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_a8sge")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainLayer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="MainLayer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="AudioSection" type="VBoxContainer" parent="MainLayer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="AudioLabel" type="Label" parent="MainLayer/PanelContainer/VBoxContainer/AudioSection"]
+layout_mode = 2
+text = "Audio"
+
+[node name="MusicVolume" type="HBoxContainer" parent="MainLayer/PanelContainer/VBoxContainer/AudioSection"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainLayer/PanelContainer/VBoxContainer/AudioSection/MusicVolume"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Music Volume"
+
+[node name="MusicVolume" type="HSlider" parent="MainLayer/PanelContainer/VBoxContainer/AudioSection/MusicVolume"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.1
+
+[node name="SFXVolume" type="HBoxContainer" parent="MainLayer/PanelContainer/VBoxContainer/AudioSection"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainLayer/PanelContainer/VBoxContainer/AudioSection/SFXVolume"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "SFX Volume"
+
+[node name="SFXVolume" type="HSlider" parent="MainLayer/PanelContainer/VBoxContainer/AudioSection/SFXVolume"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.1
+
+[node name="DisplaySection" type="VBoxContainer" parent="MainLayer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="DisplayLabel" type="Label" parent="MainLayer/PanelContainer/VBoxContainer/DisplaySection"]
+layout_mode = 2
+text = "Display"
+
+[node name="Fullscreen" type="CheckBox" parent="MainLayer/PanelContainer/VBoxContainer/DisplaySection"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Fullscreen"
+
+[node name="Parallax" type="CheckBox" parent="MainLayer/PanelContainer/VBoxContainer/DisplaySection"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Parallax"
+
+[node name="GameplaySection" type="VBoxContainer" parent="MainLayer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="GameplayLabel" type="Label" parent="MainLayer/PanelContainer/VBoxContainer/GameplaySection"]
+layout_mode = 2
+text = "Gameplay"
+
+[node name="SkipUnread" type="CheckBox" parent="MainLayer/PanelContainer/VBoxContainer/GameplaySection"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Skip Unread"
+
+[node name="Autoplay" type="CheckBox" parent="MainLayer/PanelContainer/VBoxContainer/GameplaySection"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Autoplay"
+
+[node name="Autosave" type="CheckBox" parent="MainLayer/PanelContainer/VBoxContainer/GameplaySection"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Autosave"
+
+[node name="TextSpeedMult" type="HBoxContainer" parent="MainLayer/PanelContainer/VBoxContainer/GameplaySection"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainLayer/PanelContainer/VBoxContainer/GameplaySection/TextSpeedMult"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Text Speed"
+
+[node name="TextSpeedMult" type="HSlider" parent="MainLayer/PanelContainer/VBoxContainer/GameplaySection/TextSpeedMult"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 3.0
+step = 0.4
+value = 1.0
+
+[node name="AutoSpeedMult" type="HBoxContainer" parent="MainLayer/PanelContainer/VBoxContainer/GameplaySection"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainLayer/PanelContainer/VBoxContainer/GameplaySection/AutoSpeedMult"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Autoplay Speed"
+
+[node name="AutoSpeedMult" type="HSlider" parent="MainLayer/PanelContainer/VBoxContainer/GameplaySection/AutoSpeedMult"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 3.0
+step = 0.4
+value = 1.0
+
+[node name="Spacer" type="Control" parent="MainLayer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ButtonContainer" type="HBoxContainer" parent="MainLayer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 2
+
+[node name="Done" type="Button" parent="MainLayer/PanelContainer/VBoxContainer/ButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+text = "Done"
+
+[node name="ComponentLayer" type="CanvasLayer" parent="."]
+layer = 10

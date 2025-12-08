@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://clburetvars5a"]
+
+[ext_resource type="Script" uid="uid://ckgwuiynvjmr0" path="res://VNgine/Default/Scenes/Title/TitleScene.gd" id="1_2cvya"]
+[ext_resource type="Texture2D" uid="uid://42f0uiaare14" path="res://VNgine/Default/Images/Backgrounds/Image.jpg" id="2_2cvya"]
+[ext_resource type="PackedScene" uid="uid://dgswhyx2n81ia" path="res://VNgine/Default/Scenes/_components/Pause/Pause_title.tscn" id="3_4xsy8"]
+
+[node name="TitleScene" type="Node" node_paths=PackedStringArray("main_layer", "component_layer")]
+script = ExtResource("1_2cvya")
+main_layer = NodePath("MainLayer")
+component_layer = NodePath("ComponentLayer")
+
+[node name="MainLayer" type="CanvasLayer" parent="."]
+
+[node name="Background" type="TextureRect" parent="MainLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_2cvya")
+
+[node name="Buttons" type="VBoxContainer" parent="MainLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NewGame" type="Button" parent="MainLayer/Buttons"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+text = "New Game"
+
+[node name="LoadGame" type="Button" parent="MainLayer/Buttons"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+text = "Load Game"
+
+[node name="Settings" type="Button" parent="MainLayer/Buttons"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+text = "Settings"
+
+[node name="Quit" type="Button" parent="MainLayer/Buttons"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+text = "Quit"
+
+[node name="ComponentLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="Pause" parent="ComponentLayer" instance=ExtResource("3_4xsy8")]
+unique_name_in_owner = true

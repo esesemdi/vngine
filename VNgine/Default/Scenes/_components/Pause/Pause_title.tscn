@@ -1,0 +1,79 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgswhyx2n81ia"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_be8gl"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_be8gl"]
+font_size = 24
+
+[node name="Pause" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -358.0
+offset_top = -180.0
+offset_right = 362.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_be8gl")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.22000001
+anchor_top = 0.257
+anchor_right = 0.78300005
+anchor_bottom = 0.74100006
+offset_left = 0.3999939
+offset_top = 120.96001
+offset_right = -0.24005127
+offset_bottom = -193.52002
+text = "Do you really wish to quit?"
+label_settings = SubResource("LabelSettings_be8gl")
+horizontal_alignment = 1
+
+[node name="Yes" type="Button" parent="."]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.22100002
+anchor_top = 0.256
+anchor_right = 0.78000003
+anchor_bottom = 0.74600005
+offset_left = 394.12
+offset_top = 226.68
+offset_right = -121.400024
+offset_bottom = -76.120056
+grow_horizontal = 2
+grow_vertical = 2
+text = "Yes
+"
+
+[node name="No" type="Button" parent="."]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.21900001
+anchor_top = 0.254
+anchor_right = 0.77900004
+anchor_bottom = 0.744
+offset_left = 112.67999
+offset_top = 228.12
+offset_right = -404.12006
+offset_bottom = -74.67999
+grow_horizontal = 2
+grow_vertical = 2
+text = "No
+"
