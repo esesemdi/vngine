@@ -12,7 +12,6 @@ func _ready() -> void:
 	_setup_audio_players()
 	_connect_to_signals()
 
-#region SETUP
 func _setup_audio_players() -> void:
 	_music_player = AudioStreamPlayer.new()
 	_music_player.bus = "Music"
@@ -28,9 +27,7 @@ func _connect_to_signals() -> void:
 	ShotCaller.scene_changed.connect(_on_scene_changed)
 	ConfigMan.setting_changed.connect(_on_setting_changed)
 	InputMan.intro_skip_requested.connect(_on_intro_skip_requested)
-#endregion
 
-#region PUBLIC - VIDEO
 func play_video(path: String) -> void:
 	var stream: VideoStream = load(path) as VideoStream
 	
@@ -67,9 +64,8 @@ func skip_video() -> void:
 
 func is_video_playing() -> bool:
 	return _video_player != null
-#endregion
 
-#region PUBLIC - MUSIC
+
 func play_music(path: String) -> void:
 	if is_video_playing():
 		_pending_music = path
@@ -91,18 +87,15 @@ func _play_music_internal(path: String) -> void:
 	_music_player.stream = stream
 	_music_player.volume_db = linear_to_db(ConfigMan.get_setting("audio", "music_volume"))
 	_music_player.play()
-#endregion
 
-#region PUBLIC - SFX
+
 func play_sfx(path: String) -> void:
 	var stream: AudioStream = load(path) as AudioStream
 	
 	_sfx_player.stream = stream
 	_sfx_player.volume_db = linear_to_db(ConfigMan.get_setting("audio", "sfx_volume"))
 	_sfx_player.play()
-#endregion
 
-#region SIGNAL HANDLERS
 func _on_node_added(node: Node) -> void:
 	if node is Title:
 		node.sfx_requested.connect(_on_sfx_requested)
@@ -124,7 +117,7 @@ func _on_video_finished_play_pending() -> void:
 func _on_scene_changed(scene: Def.Scenes) -> void:
 	if scene == Def.Scenes.TITLE:
 		play_music(Def.Paths.TITLE_THEME)
-	else:
+	elif scene == Def.Scenes.STORY:
 		stop_music()
 func _on_sfx_requested(path: String) -> void:
 	play_sfx(path)
@@ -136,4 +129,3 @@ func _on_setting_changed(setting: String, value: Variant) -> void:
 			_sfx_player.volume_db = linear_to_db(value)
 func _on_intro_skip_requested() -> void:
 	skip_video()
-#endregion

@@ -6,7 +6,7 @@ extends Node
 
 signal scene_changed(new: Def.Scenes)
 
-var previous_scene: Def.Scenes = Def.Scenes.NONE
+var base_scene: Def.Scenes = Def.Scenes.NONE
 var current_scene: Def.Scenes = Def.Scenes.NONE
 	
 var _scenes: Dictionary = {}
@@ -22,7 +22,6 @@ func _ready() -> void:
 #region PUBLIC
 func change_scene(scene_enum: Def.Scenes) -> void:
 	call_deferred("_change_scene_deferred", _scenes[scene_enum])
-	previous_scene = current_scene
 	current_scene = scene_enum
 	scene_changed.emit(scene_enum)
 #endregion

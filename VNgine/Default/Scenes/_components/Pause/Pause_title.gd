@@ -9,6 +9,7 @@ func _ready() -> void:
 
 func _on_yes_pressed() -> void:
 	sfx_requested.emit(Def.Paths.SFX_SELECT)
+	await get_tree().create_timer(0.5).timeout
 	get_tree().quit()
 
 func _on_no_pressed() -> void:
