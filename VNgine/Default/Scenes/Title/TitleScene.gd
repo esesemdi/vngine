@@ -2,68 +2,63 @@ class_name Title
 extends Node
 
 @export var main_layer: CanvasLayer
-@export var component_layer: CanvasLayer
+@export var ui_layer: CanvasLayer
 
 signal scene_requested(new: Def.Scenes)
-signal quit_requested
-
 signal sfx_requested(path: String)
 
-var _components: Dictionary = {}
+@onready var _ui: Dictionary = {
+	"pause": %PauseTitle,
+	"settings": %Settings
+}
 
 func _ready() -> void:
-	InputMan.pause_toggled.connect(_on_pause_toggled)
-	_check_components()
-	_connect_buttons(self)
-	hide_all_components()
+	_connect_scene_signals()
+	_connect_ui_signals()
+	hide_all_ui()
 
-#region PUBLIC
-func toggle_component(component_name: String) -> void:
-	if _components.has(component_name):
-		_components[component_name].visible = not _components[component_name].visible
+func toggle_ui(ui_name: String) -> void:
+	if _ui.has(ui_name):
+		_ui[ui_name].visible = not _ui[ui_name].visible
 
-func hide_all_components() -> void:
-	for component in _components.values():
-		component.visible = false
-#endregion
+func hide_all_ui() -> void:
+	for ui in _ui.values():
+		ui.visible = false
 
-#region PRIVATE
-func _check_components() -> void:
-	for component in component_layer.get_children():
-		_components[component.name.to_lower()] = component
+func _connect_scene_signals() -> void:
+	%NewGameBt.pressed.connect(_on_new_game_pressed)
+	%LoadGameBt.pressed.connect(_on_load_game_pressed)
+	%SettingsBt.pressed.connect(_on_settings_pressed)
+	%QuitBt.pressed.connect(_on_quit_pressed)
 
-func _connect_buttons(node: Node) -> void:
-	for child in node.get_children():
-		if child is BaseButton:
-			var method_name: String = "_on_%s_pressed" % child.name.to_snake_case()
-			if has_method(method_name):
-				child.pressed.connect(Callable(self, method_name))
-			else:
-				push_error("No method %s defined for this button" % method_name)
-	
-		if child.get_child_count() > 0:
-			_connect_buttons(child)
+func _connect_ui_signals() -> void:
+	InputMan.cancel_pressed.connect(_on_cancel_pressed)
+	%PauseTitle.return_requested.connect(_on_return_requested)
+	%PauseTitle.sfx_requested.connect(_on_sfx_requested)
+	%Settings.return_requested.connect(_on_return_requested)
+	%Settings.sfx_requested.connect(_on_sfx_requested)
 
-## SIGNALS
 func _on_new_game_pressed() -> void:
 	sfx_requested.emit(Def.Paths.SFX_SELECT)
-#	scene_requested.emit(Def.Scenes.STORY)
+	# CHANGE
+	scene_requested.emit(Def.Scenes.NONE)
 func _on_load_game_pressed() -> void:
 	sfx_requested.emit(Def.Paths.SFX_SELECT)
-#	scene_requested.emit(Def.Scenes.LOAD)
+	# CHANGE
+	scene_requested.emit(Def.Scenes.NONE)
 func _on_settings_pressed() -> void:
 	sfx_requested.emit(Def.Paths.SFX_SELECT)
-	scene_requested.emit(Def.Scenes.SETTINGS)
+	toggle_ui("settings")
 func _on_quit_pressed() -> void:
 	sfx_requested.emit(Def.Paths.SFX_SELECT)
-	quit_requested.emit()
-func _on_yes_pressed() -> void:
-	sfx_requested.emit(Def.Paths.SFX_SELECT)
-	quit_requested.emit()
-func _on_no_pressed() -> void:
-	sfx_requested.emit(Def.Paths.SFX_SELECT)
-	toggle_component("pause")
+	get_tree().quit()
 
-func _on_pause_toggled() -> void:
-	toggle_component("pause")
-#endregion
+func _on_return_requested() -> void:
+	hide_all_ui()
+func _on_cancel_pressed() -> void:
+	if not _ui["pause"].visible and not _ui["settings"].visible:
+		toggle_ui("pause")
+	else:
+		hide_all_ui()
+func _on_sfx_requested(sfx_name: StringName):
+	sfx_requested.emit(sfx_name)

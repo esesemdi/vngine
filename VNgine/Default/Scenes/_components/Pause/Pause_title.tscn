@@ -6,7 +6,7 @@ bg_color = Color(0.2, 0.2, 0.2, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_be8gl"]
 font_size = 24
 
-[node name="Pause" type="Control"]
+[node name="PauseTitle" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -44,7 +44,8 @@ text = "Do you really wish to quit?"
 label_settings = SubResource("LabelSettings_be8gl")
 horizontal_alignment = 1
 
-[node name="Yes" type="Button" parent="."]
+[node name="YesBt" type="Button" parent="."]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 1
 anchors_preset = -1
@@ -61,7 +62,8 @@ grow_vertical = 2
 text = "Yes
 "
 
-[node name="No" type="Button" parent="."]
+[node name="NoBt" type="Button" parent="."]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 1
 anchors_preset = -1

@@ -1,8 +1,5 @@
 class_name Settings
-extends Node
-
-@export var main_layer: CanvasLayer
-@export var component_layer: CanvasLayer
+extends Control
 
 @onready var music_volume: HSlider = %MusicVolume
 @onready var sfx_volume: HSlider = %SFXVolume
@@ -19,15 +16,10 @@ extends Node
 
 @onready var done: Button = %Done
 
-# To ShotCaller.gd
-signal goback_requested
-
-# To ConfigMan.gd
 signal value_changed(setting: String, value: Variant)
 signal setting_toggled(setting: String)
-
-# To MediaMan.gd
 signal sfx_requested(path: StringName)
+signal return_requested
 
 func _ready() -> void:
 	_connect_controls()
@@ -54,5 +46,5 @@ func _on_setting_toggled(value: bool, setting: String):
 	setting_toggled.emit(setting, value)
 func _on_done_pressed() -> void:
 	sfx_requested.emit(Def.Paths.SFX_SELECT)
-	goback_requested.emit()
+	return_requested.emit()
 #endregion

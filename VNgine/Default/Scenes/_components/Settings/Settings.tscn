@@ -1,8 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b5a2p1xfqyuj5"]
+[gd_scene load_steps=3 format=3 uid="uid://c58ighls1won7"]
 
-[ext_resource type="Script" uid="uid://bsxm1hih2f8px" path="res://VNgine/Default/Scenes/Settings/SettingsScene.gd" id="1_kap46"]
+[ext_resource type="Script" uid="uid://bsxm1hih2f8px" path="res://VNgine/Default/Scenes/_components/Settings/Settings.gd" id="1_fwgeg"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uldtt"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8sge"]
 content_margin_left = 40.0
 content_margin_top = 20.0
 content_margin_right = 40.0
@@ -17,7 +17,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_kap46")
+script = ExtResource("1_fwgeg")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -25,12 +25,12 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 289.0
-offset_top = 124.0
+offset_top = 50.5
 offset_right = -271.0
-offset_bottom = -116.0
+offset_bottom = -42.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_uldtt")
+theme_override_styles/panel = SubResource("StyleBoxFlat_a8sge")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2

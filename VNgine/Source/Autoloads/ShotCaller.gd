@@ -36,24 +36,14 @@ func _change_scene_deferred(scene: PackedScene) -> void:
 	
 func _preload_scenes() -> void:
 	_scenes[Def.Scenes.TITLE] = preload("res://VNgine/Default/Scenes/Title/TitleScene.tscn")
-	_scenes[Def.Scenes.SETTINGS] = preload("res://VNgine/Default/Scenes/Settings/SettingsScene.tscn")
 	#_scenes[Def.Scenes.GALLERY] = preload("res://VNgine/Default/Scenes/Gallery/scn_gallery.tscn")
-	#_scenes[Def.Scenes.LOAD] = preload("res://VNgine/Default/Scenes/Load/scn_load.tscn")
-	#_scenes[Def.Scenes.SAVE] = preload("res://VNgine/Default/Scenes/Save/scn_save.tscn")
 	#_scenes[Def.Scenes.STORY] = preload("res://VNgine/Default/Scenes/Story/scn_story.tscn")
 
 func _connect_scene_signals(node: Node) -> void:
 	if node is Title:
 		node.scene_requested.connect(_on_scene_requested)
-		node.quit_requested.connect(_on_quit_requested)
-	elif node is Settings:
-		node.goback_requested.connect(_on_goback_requested)
 
 ## SIGNALS	
 func _on_scene_requested(scene: Def.Scenes) -> void:
 	change_scene(scene)
-func _on_quit_requested() -> void:
-	get_tree().quit()
-func _on_goback_requested() -> void:
-	change_scene(previous_scene)
 #endregion

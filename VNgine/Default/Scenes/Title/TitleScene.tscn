@@ -1,13 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://clburetvars5a"]
+[gd_scene load_steps=6 format=3 uid="uid://clburetvars5a"]
 
 [ext_resource type="Script" uid="uid://ckgwuiynvjmr0" path="res://VNgine/Default/Scenes/Title/TitleScene.gd" id="1_2cvya"]
 [ext_resource type="Texture2D" uid="uid://42f0uiaare14" path="res://VNgine/Default/Images/Backgrounds/Image.jpg" id="2_2cvya"]
 [ext_resource type="PackedScene" uid="uid://dgswhyx2n81ia" path="res://VNgine/Default/Scenes/_components/Pause/Pause_title.tscn" id="3_4xsy8"]
+[ext_resource type="Script" uid="uid://c1taow1n5g7r2" path="res://VNgine/Default/Scenes/_components/Pause/Pause_title.gd" id="4_4xsy8"]
+[ext_resource type="PackedScene" uid="uid://c58ighls1won7" path="res://VNgine/Default/Scenes/_components/Settings/Settings.tscn" id="4_r0fjy"]
 
-[node name="TitleScene" type="Node" node_paths=PackedStringArray("main_layer", "component_layer")]
+[node name="TitleScene" type="Node" node_paths=PackedStringArray("main_layer")]
 script = ExtResource("1_2cvya")
 main_layer = NodePath("MainLayer")
-component_layer = NodePath("ComponentLayer")
 
 [node name="MainLayer" type="CanvasLayer" parent="."]
 
@@ -32,28 +33,36 @@ offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="NewGame" type="Button" parent="MainLayer/Buttons"]
+[node name="NewGameBt" type="Button" parent="MainLayer/Buttons"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 text = "New Game"
 
-[node name="LoadGame" type="Button" parent="MainLayer/Buttons"]
+[node name="LoadGameBt" type="Button" parent="MainLayer/Buttons"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 text = "Load Game"
 
-[node name="Settings" type="Button" parent="MainLayer/Buttons"]
+[node name="SettingsBt" type="Button" parent="MainLayer/Buttons"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 text = "Settings"
 
-[node name="Quit" type="Button" parent="MainLayer/Buttons"]
+[node name="QuitBt" type="Button" parent="MainLayer/Buttons"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 text = "Quit"
 
-[node name="ComponentLayer" type="CanvasLayer" parent="."]
+[node name="UILayer" type="CanvasLayer" parent="."]
 layer = 10
 
-[node name="Pause" parent="ComponentLayer" instance=ExtResource("3_4xsy8")]
+[node name="PauseTitle" parent="UILayer" instance=ExtResource("3_4xsy8")]
+unique_name_in_owner = true
+script = ExtResource("4_4xsy8")
+
+[node name="Settings" parent="UILayer" instance=ExtResource("4_r0fjy")]
 unique_name_in_owner = true
