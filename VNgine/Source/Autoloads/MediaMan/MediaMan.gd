@@ -12,31 +12,18 @@ func _ready() -> void:
 	_setup_audio_players()
 	_connect_to_signals()
 
-func _setup_audio_players() -> void:
-	_music_player = AudioStreamPlayer.new()
-	_music_player.bus = "Music"
-	add_child(_music_player)
-	
-	_sfx_player = AudioStreamPlayer.new()
-	_sfx_player.bus = "SFX"
-	add_child(_sfx_player)
 
-func _connect_to_signals() -> void:
-	get_tree().node_added.connect(_on_node_added)
-	video_finished.connect(_on_video_finished_play_pending)
-	ShotCaller.scene_changed.connect(_on_scene_changed)
-	ConfigMan.setting_changed.connect(_on_setting_changed)
-	InputMan.intro_skip_requested.connect(_on_intro_skip_requested)
 
+#region PUBLIC
 func play_video(path: String) -> void:
 	var stream: VideoStream = load(path) as VideoStream
 	
 	stop_music()
-	
 	_video_canvas = CanvasLayer.new()
 	_video_canvas.layer = 20
 	add_child(_video_canvas)
 	
+	""" Setting up Video Player Layer Control container """
 	var container: Control = Control.new()
 	container.set_anchors_preset(Control.PRESET_FULL_RECT)
 	container.anchor_right = 1.0
@@ -45,6 +32,7 @@ func play_video(path: String) -> void:
 	
 	var intro_volume: float = linear_to_db(ConfigMan.get_setting("audio", "music_volume"))
 	
+	""" Setting up Video Player Layer """
 	_video_player = VideoStreamPlayer.new()
 	_video_player.volume_db = intro_volume if intro_volume >= 0.1 else linear_to_db(0.1)
 	_video_player.expand = true
@@ -80,6 +68,31 @@ func stop_music() -> void:
 
 func queue_music(path: String) -> void:
 	_pending_music = path
+	
+	
+func play_sfx(path: String) -> void:
+	var stream: AudioStream = load(path) as AudioStream
+	
+	_sfx_player.stream = stream
+	_sfx_player.volume_db = linear_to_db(ConfigMan.get_setting("audio", "sfx_volume"))
+	_sfx_player.play()
+#endregion
+
+#region PRIVATE
+func _setup_audio_players() -> void:
+	_music_player = AudioStreamPlayer.new()
+	_music_player.bus = "Music"
+	add_child(_music_player)
+	
+	_sfx_player = AudioStreamPlayer.new()
+	_sfx_player.bus = "SFX"
+	add_child(_sfx_player)
+
+func _connect_to_signals() -> void:
+	video_finished.connect(_on_video_finished_play_pending)
+	ShotCaller.scene_changed.connect(_on_scene_changed)
+	ConfigMan.setting_changed.connect(_on_setting_changed)
+	InputMan.intro_skip_requested.connect(_on_intro_skip_requested)
 
 func _play_music_internal(path: String) -> void:
 	var stream: AudioStream = load(path) as AudioStream
@@ -87,20 +100,9 @@ func _play_music_internal(path: String) -> void:
 	_music_player.stream = stream
 	_music_player.volume_db = linear_to_db(ConfigMan.get_setting("audio", "music_volume"))
 	_music_player.play()
+#endregion
 
-
-func play_sfx(path: String) -> void:
-	var stream: AudioStream = load(path) as AudioStream
-	
-	_sfx_player.stream = stream
-	_sfx_player.volume_db = linear_to_db(ConfigMan.get_setting("audio", "sfx_volume"))
-	_sfx_player.play()
-
-func _on_node_added(node: Node) -> void:
-	if node is Title:
-		node.sfx_requested.connect(_on_sfx_requested)
-	elif node is Settings:
-		node.sfx_requested.connect(_on_sfx_requested)
+#region SIGNALS
 func _on_video_finished() -> void:
 	if _video_player:
 		_video_player.queue_free()
@@ -129,3 +131,4 @@ func _on_setting_changed(setting: String, value: Variant) -> void:
 			_sfx_player.volume_db = linear_to_db(value)
 func _on_intro_skip_requested() -> void:
 	skip_video()
+#endregion

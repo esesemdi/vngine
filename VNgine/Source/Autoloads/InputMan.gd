@@ -9,6 +9,19 @@ signal intro_skip_requested
 
 var input_locked: bool = false
 
+
+
+
+func lock_input() -> void:
+	input_locked = true
+
+func unlock_input() -> void:
+	input_locked = false
+
+func is_locked() -> bool:
+	return input_locked
+
+#region PRIVATE
 func _input(event: InputEvent) -> void:
 	if input_locked or ShotCaller.current_scene in Def.General.INPUT_LOCKED_SCENES:
 		get_viewport().set_input_as_handled()
@@ -27,12 +40,4 @@ func _unhandled_input(event: InputEvent) -> void:
 			
 	elif event.is_action_pressed("story_skip") and ShotCaller.current_scene == Def.Scenes.STORY:
 		skip_pressed.emit()
-
-func lock_input() -> void:
-	input_locked = true
-
-func unlock_input() -> void:
-	input_locked = false
-
-func is_locked() -> bool:
-	return input_locked
+#endregion

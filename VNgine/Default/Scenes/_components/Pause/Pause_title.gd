@@ -1,17 +1,21 @@
 extends Control
 
-signal return_requested
-signal sfx_requested(sfx_name: StringName)
+signal quit_confirmed
+signal quit_cancelled
 
 func _ready() -> void:
 	%YesBt.pressed.connect(_on_yes_pressed)
 	%NoBt.pressed.connect(_on_no_pressed)
 
-func _on_yes_pressed() -> void:
-	sfx_requested.emit(Def.Paths.SFX_SELECT)
-	await get_tree().create_timer(0.5).timeout
-	get_tree().quit()
 
+
+
+#region SIGNALS
+func _on_yes_pressed() -> void:
+	MediaMan.play_sfx(Def.Paths.SFX_SELECT)
+	await get_tree().create_timer(0.5).timeout
+	quit_confirmed.emit()
 func _on_no_pressed() -> void:
-	sfx_requested.emit(Def.Paths.SFX_SELECT)
-	return_requested.emit()
+	MediaMan.play_sfx(Def.Paths.SFX_SELECT)
+	quit_cancelled.emit()
+#endregion

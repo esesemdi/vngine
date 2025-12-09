@@ -6,18 +6,14 @@ extends Node
 
 signal scene_changed(new: Def.Scenes)
 
-var base_scene: Def.Scenes = Def.Scenes.NONE
 var current_scene: Def.Scenes = Def.Scenes.NONE
-	
 var _scenes: Dictionary = {}
 
 func _ready() -> void:
-	Util.print_logo()
 	_preload_scenes()
-	_connect_to_signals()
+	Util.print_logo()
 	MediaMan.play_video(Def.Paths.INTRO)
 	change_scene(Def.Scenes.TITLE)
-
 
 #region PUBLIC
 func change_scene(scene_enum: Def.Scenes) -> void:
@@ -27,9 +23,6 @@ func change_scene(scene_enum: Def.Scenes) -> void:
 #endregion
 
 #region PRIVATE
-func _connect_to_signals() -> void:
-	get_tree().node_added.connect(_connect_scene_signals)
-
 func _change_scene_deferred(scene: PackedScene) -> void:
 	get_tree().change_scene_to_packed(scene)
 	
@@ -37,12 +30,4 @@ func _preload_scenes() -> void:
 	_scenes[Def.Scenes.TITLE] = preload("res://VNgine/Default/Scenes/Title/TitleScene.tscn")
 	#_scenes[Def.Scenes.GALLERY] = preload("res://VNgine/Default/Scenes/Gallery/scn_gallery.tscn")
 	#_scenes[Def.Scenes.STORY] = preload("res://VNgine/Default/Scenes/Story/scn_story.tscn")
-
-func _connect_scene_signals(node: Node) -> void:
-	if node is Title:
-		node.scene_requested.connect(_on_scene_requested)
-
-## SIGNALS	
-func _on_scene_requested(scene: Def.Scenes) -> void:
-	change_scene(scene)
 #endregion
