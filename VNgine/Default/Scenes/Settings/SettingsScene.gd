@@ -53,6 +53,6 @@ func _on_value_changed(value: float, setting: String) -> void:
 func _on_setting_toggled(value: bool, setting: String):
 	setting_toggled.emit(setting, value)
 func _on_done_pressed() -> void:
-	sfx_requested.emit(Def.Const.SFX_SELECT)
+	sfx_requested.emit(Def.Paths.SFX_SELECT)
 	goback_requested.emit()
 #endregion

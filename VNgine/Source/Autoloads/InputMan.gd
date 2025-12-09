@@ -10,7 +10,7 @@ signal intro_skip_requested
 var input_locked: bool = false
 
 func _input(event: InputEvent) -> void:
-	if input_locked or ShotCaller.current_scene in Def.Const.INPUT_LOCKED_SCENES:
+	if input_locked or ShotCaller.current_scene in Def.General.INPUT_LOCKED_SCENES:
 		get_viewport().set_input_as_handled()
 		return
 	if event.is_pressed() and not event.is_echo():

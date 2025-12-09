@@ -15,7 +15,7 @@ func _ready() -> void:
 	Util.print_logo()
 	_preload_scenes()
 	_connect_to_signals()
-	MediaMan.play_video(Def.Const.INTRO_PATH)
+	MediaMan.play_video(Def.Paths.INTRO)
 	change_scene(Def.Scenes.TITLE)
 
 
