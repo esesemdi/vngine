@@ -51,6 +51,7 @@ func _on_settings_pressed() -> void:
 	toggle_ui("settings")
 func _on_quit_pressed() -> void:
 	sfx_requested.emit(Def.Paths.SFX_SELECT)
+	await get_tree().create_timer(0.5).timeout
 	get_tree().quit()
 
 func _on_return_requested() -> void:
