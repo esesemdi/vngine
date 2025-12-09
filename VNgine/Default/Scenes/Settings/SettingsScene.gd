@@ -20,7 +20,7 @@ extends Node
 @onready var done: Button = %Done
 
 # To ShotCaller.gd
-signal done_requested
+signal goback_requested
 
 # To ConfigMan.gd
 signal value_changed(setting: String, value: Variant)
@@ -53,6 +53,6 @@ func _on_value_changed(value: float, setting: String) -> void:
 func _on_setting_toggled(value: bool, setting: String):
 	setting_toggled.emit(setting, value)
 func _on_done_pressed() -> void:
-	done_requested.emit()
 	sfx_requested.emit(Def.Const.SFX_SELECT)
+	goback_requested.emit()
 #endregion

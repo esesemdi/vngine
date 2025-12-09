@@ -124,8 +124,6 @@ func _on_video_finished_play_pending() -> void:
 func _on_scene_changed(scene: Def.Scenes) -> void:
 	if scene == Def.Scenes.TITLE:
 		play_music(Def.Const.TITLE_THEME_PATH)
-	elif scene == Def.Scenes.SETTINGS:
-		play_music(Def.Const.TITLE_THEME_PATH)
 	else:
 		stop_music()
 func _on_sfx_requested(path: String) -> void:

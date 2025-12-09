@@ -46,23 +46,23 @@ func _connect_buttons(node: Node) -> void:
 
 ## SIGNALS
 func _on_new_game_pressed() -> void:
-	scene_requested.emit(Def.Scenes.STORY)
 	sfx_requested.emit(Def.Const.SFX_SELECT)
+#	scene_requested.emit(Def.Scenes.STORY)
 func _on_load_game_pressed() -> void:
-	scene_requested.emit(Def.Scenes.LOAD)
 	sfx_requested.emit(Def.Const.SFX_SELECT)
+#	scene_requested.emit(Def.Scenes.LOAD)
 func _on_settings_pressed() -> void:
+	sfx_requested.emit(Def.Const.SFX_SELECT)
 	scene_requested.emit(Def.Scenes.SETTINGS)
-	sfx_requested.emit(Def.Const.SFX_SELECT)
 func _on_quit_pressed() -> void:
-	quit_requested.emit()
 	sfx_requested.emit(Def.Const.SFX_SELECT)
+	quit_requested.emit()
 func _on_yes_pressed() -> void:
+	sfx_requested.emit(Def.Const.SFX_SELECT)
 	quit_requested.emit()
-	sfx_requested.emit(Def.Const.SFX_SELECT)
 func _on_no_pressed() -> void:
-	toggle_component("pause")
 	sfx_requested.emit(Def.Const.SFX_SELECT)
+	toggle_component("pause")
 
 func _on_pause_toggled() -> void:
 	toggle_component("pause")

@@ -47,13 +47,13 @@ func _connect_scene_signals(node: Node) -> void:
 		node.scene_requested.connect(_on_scene_requested)
 		node.quit_requested.connect(_on_quit_requested)
 	elif node is Settings:
-		node.done_requested.connect(_on_done_requested)
+		node.goback_requested.connect(_on_goback_requested)
 
 ## SIGNALS	
 func _on_scene_requested(scene: Def.Scenes) -> void:
 	change_scene(scene)
 func _on_quit_requested() -> void:
 	get_tree().quit()
-func _on_done_requested() -> void:
+func _on_goback_requested() -> void:
 	change_scene(previous_scene)
 #endregion

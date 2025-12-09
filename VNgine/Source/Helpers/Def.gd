@@ -6,7 +6,7 @@ class Const:
 	const INPUT_LOCKED_SCENES: Array[Scenes] = [Scenes.NONE]
 	const PATH_CONFIG: StringName = "user://user.cfg"
 	
-	const TITLE_THEME_PATH: StringName = "res://VNgine/Default/Music/darius_falsewood.mp3"
+	const TITLE_THEME_PATH: StringName = "res://VNgine/Default/Music/msx_living_to_see_it.mp3"
 	const INTRO_PATH: StringName = "res://VNgine/Default/Videos/intro.ogv"
 	const SFX_SELECT: StringName = "res://VNgine/Default/SFX/ui_select.mp3"
 	
