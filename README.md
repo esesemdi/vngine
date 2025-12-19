@@ -19,14 +19,10 @@ Pause script execution.
 | Syntax | Description |
 |--------|-------------|
 | `wait <time>` | Wait for duration before next command |
-| `wait <command> in <time>` | Wait for the duration specified in a previous command's transition |
-| `wait <command> with transition in <time>` | Same as above, for commands with explicit transitions |
 
 **Examples:**
 ```
 wait 2.5
-wait .bg in 1.0
-wait .move alice with slide in 0.5
 ```
 
 ---
@@ -55,6 +51,7 @@ Modify engine or story settings.
 .set text_speed 1.5
 .set music_volume 0.8
 .set player_karma 10
+.set text_font courier
 ```
 
 ---
@@ -70,6 +67,7 @@ Run arbitrary GDScript code.
 **Example:**
 ```
 .exe "GameManager.unlock_achievement('first_chapter')"
+.exe "print('debug statement')"
 ```
 
 ---
@@ -84,8 +82,8 @@ Control background images and videos.
 | `.bg "<name>" with <transition> in <time>` | Set with transition |
 | `.bg off` | Hide background immediately |
 | `.bg off with <transition> in <time>` | Hide with transition |
-| `.bg <setting>` | Apply setting immediately |
-| `.bg <setting> with <transition> in <time>` | Apply setting with transition |
+| `.bg <setting>` | Apply setting to current background immediately |
+| `.bg <setting> with <transition> in <time>` | Apply setting to current background with transition |
 
 **Transitions:** `fade`
 
@@ -115,10 +113,11 @@ Play and control video playback.
 | Syntax | Description |
 |--------|-------------|
 | `.video "<name>"` | Play video immediately |
-| `.video "<name>" with transition in <time>` | Play with transition |
+| `.video "<name>" with <transition> in <time>` | Play with transition |
 | `.video pause` | Pause current video |
 | `.video unpause` | Resume current video |
 | `.video off` | Stop and hide video |
+| `.video off with <transition> in <time>` | Stop and hide video |
 
 **Examples:**
 ```
@@ -143,8 +142,7 @@ Control background music.
 | `.mus pause in <time>` | Pause with fade |
 | `.mus unpause` | Resume music |
 | `.mus unpause in <time>` | Resume with fade |
-| `.mus <setting>` | Apply setting immediately |
-| `.mus <setting> in <time>` | Apply setting with fade |
+| `.mus <setting> <value>` | Apply setting immediately |
 
 **Settings:**
 
@@ -241,15 +239,13 @@ Display character dialogue and narration.
 |--------|-------------|
 | `<char_id> "text"` | Character speaks |
 | `"text"` | Narrator speaks |
-| `"text" <position>` | Display text without UI |
-
-**Positions:** `top`, `center`, `bottom`
+| `! "text"` | Display text without UI |
 
 **Examples:**
 ```
 alice "Hello, how are you?"
 "The room fell silent."
-"Chapter 1" center
+! "Chapter 1"
 bob "I wasn't expecting to see you here."
 ```
 
@@ -355,6 +351,9 @@ alice "You're a good person!"
 
 ```
 @start
+! "They have said it's going to be easy."
+! "But they were wrong."
+
 .bg "mansion_exterior" with fade in 1.0
 .mus "mystery_theme" in 2.0
 
