@@ -198,8 +198,8 @@ Manage character positioning on screen.
 
 | Syntax | Description |
 |--------|-------------|
-| `.add <char_id>` | Add character to stage |
-| `.add <char_id> with <transition> <time>` | Add with transition |
+| `.add <char_id> to <position>` | Add character to stage to this position |
+| `.add <char_id> to <position> with <transition> <time>` | Add with transition |
 | `.remove <char_id>` | Remove character from stage |
 | `.remove <char_id> with <transition> <time>` | Remove with transition |
 
@@ -207,8 +207,8 @@ Manage character positioning on screen.
 
 | Syntax | Description |
 |--------|-------------|
-| `.move <char_id> <position>` | Move to position |
-| `.move <char_id> <position> with <transition> <time>` | Move with transition |
+| `.move <char_id> to <position>` | Move to position |
+| `.move <char_id> to <position> with <transition> <time>` | Move with transition |
 | `.nudge <char_id> <direction> by <amount>` | Nudge in direction |
 | `.nudge <char_id> <direction> by <amount> with <transition> <time>` | Nudge with transition |
 
